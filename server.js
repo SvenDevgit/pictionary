@@ -9,13 +9,16 @@ var server = http.Server(app);
 var io = socket_io(server);
 
 io.on('connect', function(socket) {
-    console.log('client connected');
+   console.log('client connected');
 
-    socket.on('draw', function(position) {
-        socket.broadcast.emit('draw', position);
-    });
+   socket.on('draw', function(position) {
+      socket.broadcast.emit('draw', position);
+   });
 
-
+   socket.on('guess', function(guess) {
+      socket.broadcast.emit('guess', guess);
+   });
+   
 });    
 
 server.listen(process.env.PORT || 8080);
